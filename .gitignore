@@ -1,7 +1,7 @@
-.env
 venv
 .idea
 .vscode
 pycache/
 *.py[cod]
+db.sqlite3
 *.so
