@@ -20,15 +20,45 @@ from movie_app.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('api/v1/directors/', directors_view),
-    path('api/v1/directors/<int:id>', one_director_view),
-
-    path('api/v1/movies/', movies_view),
-    path('api/v1/movies/<int:id>', one_movie_view),
-
-    path('api/v1/reviews/', reviews_view),
-    path('api/v1/reviews/<int:id>', one_review_view),
-
-    path('api/v1/movies/reviews', movies_reviews_view),
-    path('api/v1/movies/<int:id>/reviews', one_movie_review_view),
+    # path('api/v1/directors/', directors_view),
+    # path('api/v1/directors/<int:id>', one_director_view),
+    #
+    # path('api/v1/movies/', movies_view),
+    # path('api/v1/movies/<int:id>', one_movie_view),
+    #
+    # path('api/v1/reviews/', reviews_view),
+    # path('api/v1/reviews/<int:id>', one_review_view),
+    #
+    # path('api/v1/movies/reviews', movies_reviews_view),
+    # path('api/v1/movies/<int:id>/reviews', one_movie_review_view),
+    path('api/v1/directors/', DirectorModelViewSet.as_view({
+        'get':'list',
+        'post': 'create'
+    }) ),
+    path('api/v1/movies/', MovieModelViewSet.as_view({
+        'get':'list',
+        'post': 'create'
+    })),
+    path('api/v1/reviews/', ReviewModelViewSet.as_view({
+        'get':'list',
+        'post': 'create'
+}))
+    ,
+    path('api/v1/movies/views/', movies_reviews_view),
+    path('api/v1/movies/<int:id>/', MovieModelViewSet.as_view({
+        'get': 'retrieve',
+        'put': 'update',
+        'delete': 'destroy'
+    })),
+    path('api/v1/directors/<int:id>/', DirectorModelViewSet.as_view({
+        'get': 'retrieve',
+        'put': 'update',
+        'delete': 'destroy'
+    })),
+    path('api/v1/reviews/<int:id>/', ReviewModelViewSet.as_view({
+        'get': 'retrieve',
+        'put': 'update',
+        'delete': 'destroy'
+    })),
+    path('api/v1/users/', include('users.urls'))
 ]
